@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Global_Intern</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fontawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <button class="navbar-toggler sideMenuToggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Global Intern</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <div class="dropdown">
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Programmes</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AllInternships">Internships </a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AllCourses">Course</a>
+                            </div>
+                        </li>
+                    </div>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Internship" asp-action="Create">Create Internship</a>
+                    </li>
+                    -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="ContactUs">Contact</a>
+                    </li>
+
+                </ul>
+                <div class="userControlles">
+                    @if (ViewData["LoggeduserName"] != null)
+                     {
+                        <div class="d-flex">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item d-flex">
+                                    @{
+                                        var userInfo = ViewData["LoggeduserName"] as List<string>;
+                                    }
+
+                                    @if (userInfo[1] != null)
+                                    {
+                                        <img class="circleImg" src="~/uploads/UserImage/@userInfo[1]" alt="Avatar">
+                                    }
+                                    else
+                                    {
+                                        <img class="circleImg" src="~/uploads/defaut-person.png" alt="Avatar">
+                                    }
+
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@userInfo[0]</a>
+
+                                </li>
+                            </ul>
+                            <button class="btn btn-success my-2 my-sm-0"  asp-controller="Account" asp-action="Logout">Logout</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex">
+                    
+                            <a style="width:100px;" class="btn btn-primary mr-1"  asp-controller="Account" asp-action="Login">Log In</a>
+
+                            <a style="width:100px;" class="btn btn-primary"  asp-controller="Account" asp-action="Register">Sign Up</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+
+        @RenderBody()
+
+    </main>
+    <footer class="footer text-muted">
+        <div class="container">
+            <form class="form-inline" style="float:left">
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">&copy; 2020 - Global Intern - Privacy</a>
+            </form>
+            <form class="form-inline my-2 my-lg-0" style="float:right">
+                <input class="form-control mr-sm-2" type="search" placeholder="Your Email" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Subscribe</button>
+            </form>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
